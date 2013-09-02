@@ -19,7 +19,7 @@ void SdAE::pretrain(vector<VectorXd> X,vector<VectorXd> &Y)
 		
 		#pragma omp parallel for
 		for(int j=0;j<X.size();j++)
-			X[j] = daes[i].get_hidden_values(X[j]);
+			X[j] = daes[i].get_hidden_value(X[j]);
 	}
 	cout << "  Last Layer" << endl;
 	lr = new LR(*param);
@@ -29,9 +29,9 @@ void SdAE::pretrain(vector<VectorXd> X,vector<VectorXd> &Y)
 void SdAE::back_propagate(VectorXd &x,VectorXd &y,double &learning_rate)
 {
 	vector<VectorXd> layer_values = vector<VectorXd>(param->Layer_Size);
-	layer_values[0] = daes[0].get_hidden_values(x);
+	layer_values[0] = daes[0].get_hidden_value(x);
 	for(int i=1;i<param->Layer_Size;i++)
-		layer_values[i] = daes[i].get_hidden_values(layer_values[i-1]);
+		layer_values[i] = daes[i].get_hidden_value(layer_values[i-1]);
 	
 	VectorXd error_value	= lr->get_label_margin(layer_values[param->Layer_Size-1]) - y;
 	VectorXd tmp			= lr->get_input_margin(error_value);
@@ -49,9 +49,9 @@ void SdAE::back_propagate(VectorXd &x,VectorXd &y,double &learning_rate)
 
 double SdAE::loss(VectorXd &x,VectorXd &y)
 {
-	VectorXd layer_value = daes[0].get_hidden_values(x);
+	VectorXd layer_value = daes[0].get_hidden_value(x);
 	for(int j=1;j<param->Layer_Size;j++)
-		layer_value = daes[j].get_hidden_values(layer_value);
+		layer_value = daes[j].get_hidden_value(layer_value);
 	return lr->get_loss(layer_value,y);
 }
 
@@ -107,7 +107,7 @@ void SdAE::test(vector<VectorXd> &X,vector<VectorXd> &Y)
 	for(int i=0;i<param->Layer_Size;i++)
 		#pragma omp parallel for
 		for(int j=0;j<X.size();j++)
-			X[j] = daes[i].get_hidden_values(X[j]);
+			X[j] = daes[i].get_hidden_value(X[j]);
 	#pragma omp parallel for
 	for(int i=0;i<X.size();i++)
 		X[i] = lr->get_label_margin(X[i]);

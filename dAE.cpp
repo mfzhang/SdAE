@@ -148,7 +148,7 @@ void dAE::train(vector<VectorXd> &X,int _hidden_size)
 	}
 }
 
-VectorXd dAE::get_hidden_values(VectorXd &x)
+VectorXd dAE::get_hidden_value(VectorXd &x)
 {
 	return x_to_y(x);
 }

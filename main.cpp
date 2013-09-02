@@ -51,18 +51,13 @@ void test_dAE(Param &param)
 	
 	dae.dump_param();
 	dae.dump_reconstruct(data.X);
-	
 }
 
 int main(int argc, char* argv[])
 {
 	init();
 	Param param(argc, argv);
-<<<<<<< HEAD
-	test_dAE(param);
-=======
 	test_SdAE(param);
->>>>>>> origin/master
 }
 
 
