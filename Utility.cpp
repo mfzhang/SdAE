@@ -74,7 +74,7 @@ namespace uIO
 		ostringstream ss;
 		for(int i=0;i<X.size();i++)
 			ss << X[i].transpose() << endl;
-		out << ss;
+		out << ss.str();
 		out.close();
 	}
 }
