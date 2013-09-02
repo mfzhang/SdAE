@@ -132,7 +132,8 @@ void dAE::train(vector<VectorXd> &X,int _hidden_size)
 	for(int count=1;count<param->dAE_max_iteration+1;count++)
 	{
 		random_shuffle(random_index.begin(),random_index.end());
-		learning_rate = 1.0/(count*X.size());
+//		learning_rate = 1.0/(count*X.size());
+		learning_rate = 1.0/(count);
 		for(int j=0;j< X.size();j++)
 			update(X[random_index[j]], learning_rate);
 		
