@@ -86,7 +86,7 @@ Param::Param(int argc,char* argv[])
 		}
 
 		//Threshold param
-		else if(!strcmp(argv[i],"-MT"))
+		else if(!strcmp(argv[i],"-DAT"))
 		{
 			dAE_stop_threshold = atof(argv[i+1]);
 			i+=2;
