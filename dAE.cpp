@@ -172,24 +172,28 @@ void dAE::back_propagate(VectorXd &input_value,VectorXd &error_value,double &lea
 
 void dAE::dump_param()
 {
-	cout << "dump b_hidden" << endl;
+	cout << "dump_param" << endl;
+	
+	cout << "\\tdump b_hidden" << endl;
 	uIO::dump("b_hidden",	b_hidden);
 	
-	cout << "dump b_observe" << endl;
+	cout << "\tdump b_observe" << endl;
 	uIO::dump("b_observe",	b_observe);
 	
-	cout << "dump W" << endl;
+	cout << "\tdump W" << endl;
 	uIO::dump("W",W);
 	
-	cout << "\tdump_param done" << endl;
+	cout << "done" << endl;
 }
 
 void dAE::dump_reconstruct(vector<VectorXd> &X)
 {
-	cout << "dump X_observed" << endl;
+	cout << "dump_param" << endl;
+
+	cout << "\tdump X_observed" << endl;
 	uIO::dump("X_observed",	X);
 
-	cout << "reconstrunt X" << endl;
+	cout << "\treconstrunt X" << endl;
 	vector<VectorXd> reconstructed = vector<VectorXd>(X.size());
 	#pragma omp prallel for
 	for(int i=0;i<X.size();i++)
@@ -198,9 +202,9 @@ void dAE::dump_reconstruct(vector<VectorXd> &X)
 		reconstructed[i] = y_to_z(y);
 	}
 	
-	cout << "dump X_reconstruct" << endl;
+	cout << "\tdump X_reconstruct" << endl;
 	uIO::dump("X_reconstructed", reconstructed);
 
-	cout << "\tdump_reconstruct done" << endl;
+	cout << "done" << endl;
 }
 
