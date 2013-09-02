@@ -23,11 +23,11 @@ void init()
 
 void test_SdAE(Param &param)
 {
-	DataSet data("TRAIN");
+	DataSet	data("TRAIN");
 	data.set("TRAIN");
 	data.normalize();
 
-	SdAE sdae(param);
+	SdAE		sdae(param);
 	sdae.pretrain(data.X,data.Y);
 	sdae.finetune(data.X,data.Y);
 	
@@ -42,7 +42,7 @@ void test_dAE(Param &param)
 	if(param.Layer_Size == 0)
 		return;
 	
-	DataSet data("TRAIN");
+	DataSet	data("TRAIN");
 	data.set("TRAIN");
 	data.normalize();
 
@@ -51,13 +51,14 @@ void test_dAE(Param &param)
 	
 	dae.dump_param();
 	dae.dump_reconstruct(data.X);
+	
 }
 
 int main(int argc, char* argv[])
 {
 	init();
 	Param param(argc, argv);
-	test_SdAE(param);
+	test_dAE(param);
 }
 
 

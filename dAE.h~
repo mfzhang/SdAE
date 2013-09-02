@@ -37,7 +37,7 @@ public:
 			dAE(Param &);
 	void 	train(vector<VectorXd> &,int );
 	
-	VectorXd	get_hidden_value(VectorXd &);
+	VectorXd	get_hidden(VectorXd &);
 	VectorXd	get_propagated_error(VectorXd &);
 	void		back_propagate(VectorXd &,VectorXd &,double &);
 	

@@ -29,8 +29,11 @@ public:
 	int		label_size;
 	
 private:
-	void init_Sizes(std::string );
-	void load(std::string );
+	void init_Feature_Size(std::string );
+	void init_Label_Size(std::string );
+	
+	void load_X(std::string );
+	void load_Y(std::string );
 
 public:
 		DataSet(std::string );
