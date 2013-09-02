@@ -1,6 +1,6 @@
 CPC		= g++
 FLAGS	= -O3 -flto -march=native -fopenmp
-TARGET	= sdae
+TARGET	= t
 
 $(TARGET):dAE.o DataSet.o LR.o Param.o SdAE.o Utility.o main.cpp
 	$(CPC) $(FLAGS) -o $(TARGET) dAE.o DataSet.o LR.o Param.o SdAE.o Utility.o main.cpp
