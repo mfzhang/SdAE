@@ -21,7 +21,7 @@ void init()
 	#endif
 }
 
-void test(Param &param)
+void test_SdAE(Param &param)
 {
 	DataSet	data("TRAIN");
 	data.set("TRAIN");
@@ -37,7 +37,7 @@ void test(Param &param)
 	sdae.test(data.X,data.Y);
 }
 
-void test2(Param &param)
+void test_dAE(Param &param)
 {
 	if(param.Layer_Size == 0)
 		return;
@@ -54,17 +54,11 @@ void test2(Param &param)
 	
 }
 
-void test3()
-{
-	uIO::make_directory("test_dir");
-}
-
 int main(int argc, char* argv[])
 {
 	init();
 	Param param(argc, argv);
-	test2(param);
-//	test3();
+	test_SdAE(param);
 }
 
 
