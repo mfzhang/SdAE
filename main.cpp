@@ -57,7 +57,7 @@ int main(int argc, char* argv[])
 {
 	init();
 	Param param(argc, argv);
-	test_SdAE(param);
+	test_dAE(param);
 }
 
 
