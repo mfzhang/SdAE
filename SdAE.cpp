@@ -12,7 +12,7 @@ void SdAE::pretrain(vector<VectorXd> X,vector<VectorXd> &Y)
 	daes = new dAE[param->Layer_Size];
 	for(int i=0;i<param->Layer_Size;i++)
 	{
-		cout << "  Layer " << i << endl;
+		cout << "  Layer:" << i << endl;
 		
 		daes[i] = dAE(*param);
 		daes[i].train(X, param->Node_Sizes[i]);
@@ -40,7 +40,7 @@ void SdAE::back_propagate(VectorXd &x,VectorXd &y,double &learning_rate)
 	for(int i=param->Layer_Size-1;0<i;i--)
 	{
 		error_value = layer_values[i].array()*(1-layer_values[i].array()) * tmp.array();
-		daes[i].back_propagate(layer_values[i],error_value ,learning_rate);
+		daes[i].back_propagate(layer_values[i-1],error_value ,learning_rate);
 		tmp = daes[i].get_propagated_error(error_value);
 	}
 	error_value = layer_values[0].array()*(1-layer_values[0].array()) * tmp.array();

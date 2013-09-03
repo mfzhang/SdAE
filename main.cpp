@@ -49,15 +49,14 @@ void test_dAE(Param &param)
 	dAE dae(param);
 	dae.train(data.X,param.Node_Sizes[0]);
 	
-	dae.dump_param();
-	dae.dump_reconstruct(data.X);
+	dae.test_L1_Loss(data.X);
 }
 
 int main(int argc, char* argv[])
 {
 	init();
 	Param param(argc, argv);
-	test_dAE(param);
+	test_SdAE(param);
 }
 
 

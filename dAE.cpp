@@ -133,6 +133,7 @@ void dAE::train(vector<VectorXd> &X,int _hidden_size)
 	{
 		random_shuffle(random_index.begin(),random_index.end());
 		learning_rate = 1.0/(count);
+//		learning_rate = 1.0/(count*X.size());
 		for(int j=0;j< X.size();j++)
 			update(X[random_index[j]], learning_rate);
 		
@@ -173,7 +174,7 @@ void dAE::dump_param()
 {
 	cout << "dump_param" << endl;
 	
-	cout << "\\tdump b_hidden" << endl;
+	cout << "\tdump b_hidden" << endl;
 	uIO::dump("b_hidden",	b_hidden);
 	
 	cout << "\tdump b_observe" << endl;
@@ -204,6 +205,43 @@ void dAE::dump_reconstruct(vector<VectorXd> &X)
 	cout << "\tdump X_reconstruct" << endl;
 	uIO::dump("X_reconstructed", reconstructed);
 
+	cout << "\tget diffs X" << endl;
+	#pragma omp prallel for
+	for(int i=0;i<X.size();i++)
+		reconstructed[i] -= X[i];
+	
+	cout << "\tdump X_diff" << endl;
+	uIO::dump("X_diff", reconstructed);
+
 	cout << "done" << endl;
 }
+
+
+void dAE::test_L2_Loss(vector<VectorXd> &X)
+{
+	double result = 0;
+	VectorXd y;
+	#pragma omp parallel for reduction(+:result)
+	for(int i=0;i<X.size();i++)
+	{
+		y = x_to_y(X[i]);
+		result += (X[i] - y_to_z(y)).norm();
+	}
+	cout << "Sqrt Error\t" << result << "\t" << (X.size()*X[0].size()) << endl;
+}
+
+
+void dAE::test_L1_Loss(vector<VectorXd> &X)
+{
+	double result = 0;
+	VectorXd y;
+	#pragma omp parallel for reduction(+:result)
+	for(int i=0;i<X.size();i++)
+	{
+		y = x_to_y(X[i]);
+		result += (X[i] - y_to_z(y)).lpNorm<1>();
+	}
+	cout << "Sqrt Error\t" << result << "\t" << (X.size()*X[0].size()) << endl;
+}
+
 

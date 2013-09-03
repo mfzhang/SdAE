@@ -43,6 +43,8 @@ public:
 	
 	void		dump_param();
 	void		dump_reconstruct(vector<VectorXd> &);
+	void		test_L1_Loss(vector<VectorXd> &);
+	void		test_L2_Loss(vector<VectorXd> &);
 };
 
 #endif

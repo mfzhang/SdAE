@@ -35,8 +35,8 @@ Param::Param(int argc,char* argv[])
 	BP_max_iteration	= 100;
 	LR_max_iteration	= 100;
 	
-	dAE_stop_threshold	= 1e-3;
-	BP_stop_threshold	= 1e-3;
+	dAE_stop_threshold	= 1e-0;
+	BP_stop_threshold	= 1e-6;
 	LR_stop_threshold	= 1e-3;
 	
 	Node_Sizes.push_back(10);
